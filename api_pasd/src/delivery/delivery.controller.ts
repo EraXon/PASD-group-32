@@ -9,11 +9,11 @@ export class DeliverysController {
 
   @Post()
   async create(@Body() createDeliveryDto: CreateDeliveryDto) {
-    return this.deliverysService.create(createDeliveryDto);
+    return await this.deliverysService.create(createDeliveryDto);
   }
 
   @Get()
-  async findAll(): Promise<Delivery[]> {
+  async findAll(){
     return this.deliverysService.findAll();
   }
 }
