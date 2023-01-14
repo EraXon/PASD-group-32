@@ -6,5 +6,7 @@ export const Retailer_DeliverySchema = new mongoose.Schema({
     order_id: Number,
     cost_in_cents: Number,
     status: String,
-    id: Number
+    id: Number,
+    ddscheduler_id: String,
+    dddeliverer_id: String
 });

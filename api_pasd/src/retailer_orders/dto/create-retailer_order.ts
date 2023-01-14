@@ -20,5 +20,8 @@ export class CreateRetailer_OrderDto {
         country: string
       }
       id: number
+      retailer_id: number;
+      vehicle_id: number;
+      warehouse_id: number;
   }
   
