@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
-import { DeliveryModule } from './delivery/delivery.module';
-import { PackageModule } from './retailer_orders/package.module';
+import { DeliveryLogicModule } from './delivery_logic/package.module';
 
 @Module({
-  imports: [DeliveryModule,PackageModule],
+  imports: [DeliveryLogicModule],
 })
 export class AppModule {}

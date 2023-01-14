@@ -10,4 +10,4 @@ import { PackageService } from './package.service';
   controllers: [PackageController],
   providers: [PackageService, ...packageProvider,...deliveryProvider],
 })
-export class PackageModule {}
+export class DeliveryLogicModule {}
