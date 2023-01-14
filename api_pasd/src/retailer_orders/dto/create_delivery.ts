@@ -1,4 +1,4 @@
-export class CreateRetailer_DeliveryDto{
+export class Create_DeliveryDto{
     expected_deliver_datetime: Date;
     actual_deliver_datetime: Date;
     order_id: number;

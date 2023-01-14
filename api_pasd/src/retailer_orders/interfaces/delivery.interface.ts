@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export interface Retailer_Delivery extends Document {
+export interface Delivery extends Document {
     expected_deliver_datetime: Date;
     actual_deliver_datetime: Date;
     order_id: number;

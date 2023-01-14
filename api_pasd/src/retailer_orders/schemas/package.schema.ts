@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-export const Retailer_OrderSchema = new mongoose.Schema({
+export const OrderSchema = new mongoose.Schema({
     send_date: Date,
     x_in_mm: Number,
     y_in_mm: Number,

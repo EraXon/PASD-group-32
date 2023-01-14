@@ -1,4 +1,4 @@
-export class CreateRetailer_OrderDto {
+export class Create_PackageDto {
       send_date: Date
       x_in_mm: number
       y_in_mm: number

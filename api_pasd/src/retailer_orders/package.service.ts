@@ -4,23 +4,21 @@ import { Model } from 'mongoose';
 import { DeliverysController } from 'src/delivery/delivery.controller';
 import { deliverysProviders } from 'src/delivery/delivery.providers';
 import { CreateDeliveryDto } from 'src/delivery/dto/create-delivery.dto';
-import { CreateRetailer_OrderDto } from './dto/create-retailer_order';
-import { CreateRetailer_DeliveryDto } from './dto/create_retailer_delivery';
-import { Retailer_Delivery } from './interfaces/retailer_delivery.interface';
-import { Retailer_Order } from './interfaces/retailer_order.interface';
-
+import { Create_PackageDto } from './dto/create_package';
+import { Create_DeliveryDto } from './dto/create_delivery';
+import { Delivery } from './interfaces/delivery.interface';
+import { Package } from './interfaces/package.interface';
 
 
 @Injectable()
-export class Retailer_OrderService {
-  constructor(@Inject('RETAILER_ORDER_MODEL') private readonly retailer_order_model: Model<Retailer_Order>
-  ,@Inject('RETAILER_DELIVERY_MODEL') private readonly retailer_delivery_model: Model<Retailer_Delivery>) {}
-  
+export class PackageService {
+  constructor(@Inject('PACKAGE_MODEL') private readonly package_model: Model<Package>
+  ,@Inject('DELIVERY_MODEL') private readonly delivery_model: Model<Delivery>) {}
   
   async findAll(){
     //various constants and variables needed
     let url = 'https://pasd-webshop-api.onrender.com/api/order/';
-    const config = {headers:{'x-api-key': '6FQeQLpd2LvnCRQpdxHf'}};
+    const config = {headers:{'x-api-key': 'iQE9m2F6bZCifrrp2oeq'}};
     let body={
       "price_in_cents": 0,
       "expected_delivery_datetime": null,
@@ -52,23 +50,20 @@ export class Retailer_OrderService {
       } catch (error) {
         console.log("Retailer did not accept any of our offers")
       }
-  
-      
     }  
-
     return null
   }
-  async create(createRetailerDto: CreateRetailer_DeliveryDto){
-    
-    const createdDelivery = await this.retailer_delivery_model.create(createRetailerDto);
+
+  async create(createDeliveryDto: Create_DeliveryDto){
+    const createdDelivery = await this.delivery_model.create(createDeliveryDto);
     console.log(createdDelivery)
     return createdDelivery;
   }
 
-   async startCreateProcess(order:CreateRetailer_OrderDto,delivery:CreateRetailer_DeliveryDto) {
+   async startCreateProcess(order:Create_PackageDto,delivery:Create_DeliveryDto) {
     console.log(delivery)
-    const response1=await this.retailer_delivery_model.create(delivery)
-    const response=await this.retailer_order_model.create(order)
+    const response1=await this.delivery_model.create(delivery)
+    const response=await this.package_model.create(order)
     //console.log(response1)
     return null
     
