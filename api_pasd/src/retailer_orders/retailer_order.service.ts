@@ -1,6 +1,9 @@
 import { Get, HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { Model } from 'mongoose';
+import { DeliverysController } from 'src/delivery/delivery.controller';
+import { deliverysProviders } from 'src/delivery/delivery.providers';
+import { CreateDeliveryDto } from 'src/delivery/dto/create-delivery.dto';
 import { CreateRetailer_OrderDto } from './dto/create-retailer_order';
 import { Retailer_Order } from './interfaces/retailer_order.interface';
 
@@ -26,26 +29,37 @@ export class Retailer_OrderService {
       return "No available orders"
     }
     console.log(order_retail.orders.length)
-    url='https://pasd-webshop-api.onrender.com/api/delivery/'
     for(const order of order_retail.orders){
       
-      let post_response:any
-      try {
-        body.order_id=order.id
-        post_response =(await axios.post(url,body,config)).data
-        console.log(post_response)
-      } catch (error) {
-        console.log("na ca nu se paote")
-      }
+      this.bid(order, body);
       
-    }
-    
-    
+    }  
 
     return null
   }
   async create(createRetailerDto: CreateRetailer_OrderDto){
     const createdDelivery = this.retailer_order_model.create(createRetailerDto);
     return createdDelivery;
+  }
+
+  private async bid(order : Retailer_Order, body) {
+    let post_response:any
+      try {
+        body.order_id=order.id;
+        const url='https://pasd-webshop-api.onrender.com/api/delivery/';
+        const config = {headers:{'x-api-key': '6FQeQLpd2LvnCRQpdxHf'}};
+        post_response =(await axios.post(url,body,config))
+        console.log(post_response)
+        if(post_response.status === 200 && post_response.status === "EXP"){
+            let delivery = new CreateDeliveryDto;
+            delivery.package_id = post_response.data.id;
+            delivery.status = post_response.data.status;
+            //TODO: how to add things to our database (package and delivery)
+        } else if(post_response.status === 200) {
+            
+        }
+      } catch (error) {
+        console.log("na ca nu se paote")
+      }
   }
 }
