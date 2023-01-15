@@ -7,4 +7,5 @@ export class Create_DeliveryDto{
     retailer_id: string;
     ddscheduler_id: string;
     dddeliverer_id: string;
+    id:number
   }

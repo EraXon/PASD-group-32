@@ -8,5 +8,5 @@ export const DeliverySchema = new mongoose.Schema({
     status: String,
     id: Number,
     ddscheduler_id: String,
-    dddeliverer_id: String
+    dddeliverer_id: String,
 });
