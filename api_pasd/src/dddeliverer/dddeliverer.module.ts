@@ -5,7 +5,7 @@ import { PackageController } from 'src/delivery_logic/package.controller';
 import { DeliveryLogicModule } from 'src/delivery_logic/package.module';
 import { packageProvider } from 'src/delivery_logic/package.provider';
 import { PackageService } from 'src/delivery_logic/package.service';
-import { DddelivererController } from './dddscheduler.controller';
+import { DddelivererController } from './dddeliverer.controller';
 import { DddelivererService } from './dddeliverer.service';
 
 @Module({
