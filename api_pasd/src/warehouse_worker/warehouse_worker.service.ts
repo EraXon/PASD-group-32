@@ -1,19 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
-import * as fs from 'fs'
+
 
 @Injectable()
 export class WarehouseWorkerService {
     
     async updateLabel(){
-        
-        const filePath = 'path/to/file.txt';
-        const fileData = fs.readFileSync(filePath);
-        if(fileData){
+        const fs = require('fs');
+        const fileDescriptor = fs.openSync('./newfile.txt', 'r');
+        const file = new fs.File(fileDescriptor, './newfile.txt');
         const formData = new FormData();
-        formData.append('labelFile', fileData, 'file.txt');
-        }
-        console.log(await axios.post(
+        formData.append('labelFile', file, 'newfile.txt');
+        axios.post(
         'https://pasd-webshop-api.onrender.com/api/label?delivery_id=3689',
         formData,
         {
@@ -29,6 +27,6 @@ export class WarehouseWorkerService {
         })
         .catch(error => {
         console.log(error);
-        }));
+        });
     }
 }
