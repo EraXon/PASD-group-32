@@ -1,9 +1,6 @@
 import { Get, HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { Model } from 'mongoose';
-import { DeliverysController } from 'src/delivery/delivery.controller';
-import { deliverysProviders } from 'src/delivery/delivery.providers';
-import { CreateDeliveryDto } from 'src/delivery/dto/create-delivery.dto';
 import { Create_PackageDto } from './dto/create_package';
 import { Create_DeliveryDto } from './dto/create_delivery';
 import { Delivery } from './interfaces/delivery.interface';
@@ -18,7 +15,7 @@ export class PackageService {
   async findAll(){
     //various constants and variables needed
     let url = 'https://pasd-webshop-api.onrender.com/api/order/';
-    const config = {headers:{'x-api-key': 'iQE9m2F6bZCifrrp2oeq'}};
+    const config = {headers:{'x-api-key': '6FQeQLpd2LvnCRQpdxHf'}};
     let body={
       "price_in_cents": 0,
       "expected_delivery_datetime": null,
