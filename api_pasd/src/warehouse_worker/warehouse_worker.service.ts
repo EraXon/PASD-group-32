@@ -9,10 +9,17 @@ export class WarehouseWorkerService {
         const fs = require('fs');
         console.log(__dirname);
         console.log(fs.readdirSync(__dirname));
-        const fileDescriptor = fs.openSync('./newfile.txt', 'r');
-        const file = new fs.File(fileDescriptor, './newfile.txt');
+        /*await fs.writeFile('./newfile.txt', 'Hello World!', (err) => {
+            if (err) throw err;
+            console.log('The file has been saved!');
+        });
+        /*
+        const filePath = './newfile.txt';
+        const fileData = fs.readFileSync(filePath);
+        */
         const formData = new FormData();
-        formData.append('labelFile', file, 'newfile.txt');
+        formData.append('labelFile', fs.readFileSync('./newfile.pdf;type=application/pdf'), './newfile.pdf;type=application/pdf');
+        
         axios.post(
         'https://pasd-webshop-api.onrender.com/api/label?delivery_id=3689',
         formData,
