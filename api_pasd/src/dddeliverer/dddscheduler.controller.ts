@@ -9,7 +9,7 @@ export class DddelivererController {
     
     @Patch('/:id')
     patchDelvery(
-    @Param()id,
+    @Param('id')id,
     @Body()toPatch 
     ){
         return this.dddelivererService.patchDelivery(toPatch,id);

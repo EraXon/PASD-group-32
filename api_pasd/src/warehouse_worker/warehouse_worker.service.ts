@@ -1,41 +1,38 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { Model } from 'mongoose';
+import { Delivery } from 'src/delivery_logic/interfaces/delivery.interface';
+import { Package } from 'src/delivery_logic/interfaces/package.interface';
 
 
 @Injectable()
 export class WarehouseWorkerService {
-    
-    async updateLabel(){
-        const fs = require('fs');
-        console.log(__dirname);
-        console.log(fs.readdirSync(__dirname));
-        /*await fs.writeFile('./newfile.txt', 'Hello World!', (err) => {
-            if (err) throw err;
-            console.log('The file has been saved!');
-        });
-        /*
-        const filePath = './newfile.txt';
-        const fileData = fs.readFileSync(filePath);
-        */
-        const formData = new FormData();
-        formData.append('labelFile', fs.readFileSync('./newfile.pdf;type=application/pdf'), './newfile.pdf;type=application/pdf');
+    constructor(@Inject('PACKAGE_MODEL') private readonly package_model: Model<Package>
+    ,@Inject('DELIVERY_MODEL') private readonly delivery_model: Model<Delivery>){}
+    async updateLabel(id){
+        var axios = require('axios');
+        var FormData = require('form-data');
+        var fs = require('fs');
+        var data = new FormData();
+        data.append('labelFile', fs.createReadStream('./label.txt'));
+        let url='https://pasd-webshop-api.onrender.com/api/label?delivery_id='+<string>id
+        var config = {
+          method: 'post',
+          url: url,
+          headers: { 
+            'x-api-key': '6FQeQLpd2LvnCRQpdxHf', 
+            ...data.getHeaders()
+          },
+          data : data
+        };
         
-        axios.post(
-        'https://pasd-webshop-api.onrender.com/api/label?delivery_id=3689',
-        formData,
-        {
-            headers: {
-            'accept': 'application/json',
-            'x-api-key': '6FQeQLpd2LvnCRQpdxHf',
-            'Content-Type': 'multipart/form-data'
-            }
-        }
-        )
-        .then(response => {
-        console.log();
+        axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
         })
-        .catch(error => {
-        console.log(error);
+        .catch(function (error) {
+          console.log(error);
         });
+        await this.delivery_model.updateOne({id:id},{status:"RFP"})
     }
 }
