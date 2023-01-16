@@ -13,7 +13,7 @@ export class schedulerService{
     
     async getAll() {
         await axios.get("http://localhost:3000/orders")
-        return this.delivery_model.find()
+        return await this.delivery_model.find()
     }
     
     async update(createDeliveryDto:Create_DeliveryDto)

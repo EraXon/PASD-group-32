@@ -45,7 +45,7 @@ export class PackageService {
           
         }
       } catch (error) {
-        console.log("Retailer did not accept any of our offers")
+        console.log("Retailer did not accept this offer")
       }
     }  
     return null
