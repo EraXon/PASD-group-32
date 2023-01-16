@@ -6,9 +6,13 @@ import { schedulerService } from "./scheduler.service";
 export class schedulerController{
     constructor(private readonly schedulerService:schedulerService){}
    
-    @Get()
+    @Get('deliveries')
     deliveresToBeHandled(){
-        return this.schedulerService.getAll();
+        return this.schedulerService.getAlldeliveries();
+    }
+    @Get('packages')
+    retrievePackages(){
+        return this.schedulerService.getAllPackages();
     }
     @Post()
     updatedelievries(@Body() createTrackDto: Create_DeliveryDto){

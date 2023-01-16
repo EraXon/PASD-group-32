@@ -3,7 +3,7 @@ import { Patch } from '@nestjs/common/decorators/http/request-mapping.decorator'
 import { Body, Param } from '@nestjs/common/decorators/http/route-params.decorator';
 import { DddelivererService } from './dddeliverer.service';
 
-@Controller('dddscheduler')
+@Controller('dddeliverer')
 export class DddelivererController {
     constructor(private readonly dddelivererService: DddelivererService){}
     
