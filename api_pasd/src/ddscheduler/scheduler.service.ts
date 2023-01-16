@@ -7,12 +7,13 @@ import { Package } from "src/delivery_logic/interfaces/package.interface";
 
 @Injectable()
 export class schedulerService{
+
+    constructor(@Inject('PACKAGE_MODEL') private readonly package_model: Model<Package>
+    ,@Inject('DELIVERY_MODEL') private readonly delivery_model: Model<Delivery>){}
+
     async getAllPackages() {
         return await this.package_model.find()
     }
-    constructor(@Inject('PACKAGE_MODEL') private readonly package_model: Model<Package>
-    ,@Inject('DELIVERY_MODEL') private readonly delivery_model: Model<Delivery>){}
-    
     
     async getAlldeliveries() {
         await axios.get("http://localhost:3000/orders")
