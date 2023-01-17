@@ -8,7 +8,7 @@ import {DeliveryFormUpdateWarehouseWorker} from "../../components";
 
 function WarehouseWorker() : JSX.Element {
     const backend = useContext(BackendContext);
-    const [res, setRes] = useState(0);
+    const [res, setRes] = useState<Number>(500);
     const [loading, setLoading] = useState(false);
 
 
@@ -37,6 +37,7 @@ function WarehouseWorker() : JSX.Element {
             <h3>Update Delivery - For Warehouse Worker</h3>
             <DeliveryFormUpdateWarehouseWorker onSubmit={handleSubmit} />
             {loading && <p>Loading...</p> }
+            {res !== 500 && <p>Delivery updated successfully!</p>}
         </div>
     );
 }

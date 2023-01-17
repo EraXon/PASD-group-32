@@ -1,4 +1,4 @@
-import {UpdateDeliveryFormProps} from "../../models/update-props.model";
+import {UpdateDeliveryFormProps} from "../../models";
 
 function DeliveryFormUpdateScheduler({delivery, onSubmit} : UpdateDeliveryFormProps){
     return (

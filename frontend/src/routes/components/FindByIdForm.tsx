@@ -1,4 +1,4 @@
-import {UpdateDeliveryFormProps} from "../../models/update-props.model";
+import {UpdateDeliveryFormProps} from "../../models";
 
 function FindByIdForm({delivery, onSubmit} : UpdateDeliveryFormProps){
     return (

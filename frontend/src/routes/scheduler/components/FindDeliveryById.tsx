@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import {BackendContext} from "../../../BackendContext";
 import {getFormValues} from "../../../utils/form";
-import {DeliveryModel, UpdateResult} from "../../../models";
+import {DeliveryModel} from "../../../models";
 import {DDApi} from "../../../api";
 import {FindByIdForm} from "../../components";
+import {DeliveryComponent} from "../../components";
 
 function FindDeliveryById() : JSX.Element {
     const backend = useContext(BackendContext);
@@ -40,16 +41,7 @@ function FindDeliveryById() : JSX.Element {
                 res.order_id &&
                 <>
                     <h3>Delivery details:</h3>
-                    Id: {res.id}<br/>
-                    Cost (in cents): {res.cost_in_cents}<br/>
-                    Status: {res.status}<br/>
-                    Order id: {res.order_id}<br/>
-                    Retailer id: {res.retailer_id ? res.retailer_id : 'null'}<br/>
-                    Scheduler id: {res.ddscheduler_id ? res.ddscheduler_id : 'null'}<br/>
-                    Deliverer id: {res.dddeliverer_id ? res.dddeliverer_id : 'null'}<br/>
-                    Expected time: {res.expected_deliver_datetime? res.expected_deliver_datetime.toString() : 'null'}<br/>
-                    Actual time: {res.actual_deliver_datetime? res.actual_deliver_datetime.toString() : 'null'}<br/>
-                    <hr/>
+                    <DeliveryComponent {...res}/>
                 </>
             }
         </div>

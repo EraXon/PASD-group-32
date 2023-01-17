@@ -7,19 +7,14 @@ export class DDApi {
         return response.data;
     }
 
-    public static async updateDeliveryByIdDeliverer(backend: string, id: number, delivery: DeliveryModel): Promise<DeliveryModel> {
+    public static async updateDeliveryByIdDeliverer(backend: string, id: number, delivery: DeliveryModel): Promise<Number> {
         const response = await axios.patch(`${backend}/dddeliverer/${id}`, delivery);
-        return response.data;
-    }
-
-    public static async updateDeliveryByIdWW(backend: string, id: number) {
-        const response = await axios.post(`${backend}/warehouse-worker/upload/${id}`, null);
         return response.status;
     }
 
-    public static async addDelivery(backend: string, delivery: DeliveryModel) : Promise<number> {
-        const response = await axios.post(`${backend}/ddscheduler`, delivery);
-        return response.data;
+    public static async updateDeliveryByIdWW(backend: string, id: number): Promise<Number> {
+        const response = await axios.post(`${backend}/warehouse-worker/upload/${id}`, null);
+        return response.status;
     }
 
    public static async getDeliveries(backend: string) : Promise<Deliveries> {

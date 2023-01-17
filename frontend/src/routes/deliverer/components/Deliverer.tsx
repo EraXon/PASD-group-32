@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
 import {BackendContext} from "../../../BackendContext";
 import {DeliveryModel} from "../../../models";
-import {getFormValues} from "../../../utils/form";
+import {getFormValues} from "../../../utils";
 import {DDApi} from "../../../api";
 import {DeliveryFormUpdateDeliverer} from "../../components";
 
 
 function Deliverer() : JSX.Element {
     const backend = useContext(BackendContext);
-    const [res, setRes] = useState({} as DeliveryModel);
+    const [res, setRes] = useState<Number>(500);
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState('');
 
@@ -38,6 +38,7 @@ function Deliverer() : JSX.Element {
             <h3>Update Delivery - For Deliverer</h3>
             <DeliveryFormUpdateDeliverer setStatus={setStatus} onSubmit={handleSubmit} />
             {loading && <p>Loading...</p> }
+            {res !== 500 && <p>Delivery updated successfully!</p>}
         </div>
     );
 }
