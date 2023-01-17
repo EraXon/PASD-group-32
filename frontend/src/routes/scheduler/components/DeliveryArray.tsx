@@ -1,11 +1,11 @@
-import {DeliveryModel} from '../../../models';
+import {Deliveries, DeliveryModel} from '../../../models';
 
 interface Loading {
     loading : boolean
 }
 
 interface DeliveryResults {
-    deliveries : DeliveryModel[]
+    deliveries : Deliveries
 }
 
 type DeliveryResultsProps = DeliveryResults  & Loading;

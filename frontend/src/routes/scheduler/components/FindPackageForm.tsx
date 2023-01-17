@@ -1,32 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
 import {BackendContext} from "../../../BackendContext";
-import {Deliveries, PaginationQuery} from "../../../models";
+import {Packages, PaginationQuery} from "../../../models";
 import {DDApi} from "../../../api";
 import {Pagination} from "../../components";
-import {DeliveryArray} from "./DeliveryArray";
+import {PackageArray} from "./PackageArray";
 
 
 
-function FindDeliveryForm() : JSX.Element {
+function FindPackageForm() : JSX.Element {
     const backend = useContext(BackendContext);
-    const [results, setResults] = useState([] as Deliveries);
+    const [results, setResults] = useState([] as Packages);
     const [loading, setLoading] = useState(false);
     const [limit, setLimit] = useState(10);
     const [offset, setOffset] = useState(0);
 
     async function handleSubmit (event : React.FormEvent<HTMLFormElement>) : Promise<void> {
         event.preventDefault();
-        await retrieveDeliveries();
+        await retrievePackages();
     }
 
-    async function retrieveDeliveries () : Promise<void> {
+    async function retrievePackages () : Promise<void> {
         setLoading(true);
         try {
-            let data = await DDApi.getDeliveries(backend,{offset, limit} as PaginationQuery);
+            let data = await DDApi.getPackages(backend,{offset, limit} as PaginationQuery);
             setResults(data);
             setLoading(false);
         } catch (error : any) {
-            let errorMessage = `Error while fetching deliveries!\n`;
+            let errorMessage = `Error while fetching Packages!\n`;
             let resMessage = error.data?.response['error-message'];
             if (resMessage) {
                 errorMessage += error.data.response['error-message'];
@@ -39,7 +39,7 @@ function FindDeliveryForm() : JSX.Element {
 
 
     useEffect(() => {
-        retrieveDeliveries();
+        retrievePackages();
     }, [backend, limit, offset])
 
 
@@ -52,7 +52,7 @@ function FindDeliveryForm() : JSX.Element {
 
     return (
         <div>
-            <h3>Get Deliveries</h3>
+            <h3>Get Packages</h3>
             <form onSubmit={handleSubmit}>
 
                 <Pagination {...paginationProps} />
@@ -60,11 +60,11 @@ function FindDeliveryForm() : JSX.Element {
                 <button type="submit">Search</button>
             </form>
 
-            <DeliveryArray deliveries={results} loading={loading} />
+            <PackageArray packages={results} loading={loading} />
         </div>
     );
 }
 
 export {
-    FindDeliveryForm
+    FindPackageForm
 };

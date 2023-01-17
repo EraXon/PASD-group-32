@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {PaginationQuery, DeliveryModel, UpdateResult} from "../models";
+import {PaginationQuery, DeliveryModel, UpdateResult, Deliveries, Packages} from "../models";
 import {constructUrl} from "../utils/url";
 
 export class DDApi {
@@ -23,11 +23,22 @@ export class DDApi {
         return response.data;
     }
 
-   public static async getDeliveries(backend: string, props: PaginationQuery) : Promise<DeliveryModel[]> {
+   public static async getDeliveries(backend: string, props: PaginationQuery) : Promise<Deliveries> {
         /*backend += `/ddscheduler`;
         const url = constructUrl(backend, props);*/
         const response = await axios.get(`${backend}/ddscheduler/deliveries`);
         return response.data;
+    }
+
+    public static async getPackages(backend: string, props: PaginationQuery): Promise<Packages> {
+        /*backend += `/ddscheduler`;
+        const url = constructUrl(backend, props);*/
+        const response = await axios.get(`${backend}/ddscheduler/packages`);
+        return response.data;
+    }
+
+    public static async getDeliveryByID(backend: string, id: number): Promise<DeliveryModel> {
+
     }
 
 }

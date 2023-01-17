@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
-import {BackendContext} from "../../BackendContext";
-import {DeliveryModel} from "../../models";
-import {getFormValues} from "../../utils/form";
-import {DDApi} from "../../api";
-import {DeliveryFormUpdateWarehouseWorker} from "../components";
+import {BackendContext} from "../../../BackendContext";
+import {getFormValues} from "../../../utils/form";
+import {DeliveryModel, UpdateResult} from "../../../models";
+import {DDApi} from "../../../api";
+import {DeliveryFormUpdateScheduler} from "../../components/DeliveryFormUpdateScheduler";
+import {FindByIdForm} from "../../components";
 
-
-function WarehouseWorker() : JSX.Element {
+function FindDeliveryById() : JSX.Element {
     const backend = useContext(BackendContext);
-    const [res, setRes] = useState({} as DeliveryModel);
+    const [res, setRes] = useState({} as UpdateResult);
     const [loading, setLoading] = useState(false);
 
 
@@ -18,7 +18,7 @@ function WarehouseWorker() : JSX.Element {
         const formData = new FormData(event.currentTarget);
         const body : DeliveryModel = getFormValues(formData);
         try {
-            const data = await DDApi.updateDeliveryByIdWW(backend, body.id);
+            const data = await DDApi.updateDeliveryByIdScheduler(backend, body.order_id, body);
             setRes(data);
         } catch (error : any) {
             let errorMessage = `Error while processing!\n`;
@@ -34,13 +34,19 @@ function WarehouseWorker() : JSX.Element {
 
     return (
         <div>
-            <h3>Update Delivery - For Deliverer</h3>
-            <DeliveryFormUpdateWarehouseWorker onSubmit={handleSubmit} />
+            <h3>Find Delivery By ID</h3>
+            <FindByIdForm onSubmit={handleSubmit} />
             {loading && <p>Loading...</p> }
+            {
+                res.matchedCount &&
+                <>
+                    <h3>Delivery updated successfully!</h3>
+                </>
+            }
         </div>
     );
 }
 
 export {
-    WarehouseWorker
+    FindDeliveryById
 }

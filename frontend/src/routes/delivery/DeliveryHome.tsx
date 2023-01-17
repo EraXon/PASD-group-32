@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {DDApi} from "../../api";
 import {DeliveryModel} from "../../models";
 import {useParams} from "react-router-dom";
 import {BackendContext} from "../../BackendContext";

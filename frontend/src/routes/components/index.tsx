@@ -5,3 +5,4 @@ export * from './Pagination';
 export * from './DeliveryFormUpdateWarehouseWorker';
 export * from './DeliveryFormUpdateDeliverer';
 export * from './DeliveryFormUpdateScheduler';
+export * from './FindByIdForm';
