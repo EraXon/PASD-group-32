@@ -9,10 +9,18 @@ import { Package } from './interfaces/package.interface';
 
 @Injectable()
 export class PackageService {
+  async getPackage(id: any) {
+    return await this.package_model.findOne({id:id});;
+  }
+  async getDelivery(id: any) {
+    return await this.delivery_model.findOne({id:id});
+  }
   constructor(@Inject('PACKAGE_MODEL') private readonly package_model: Model<Package>
   ,@Inject('DELIVERY_MODEL') private readonly delivery_model: Model<Delivery>) {}
   
-  async findAll(){
+  async getAllSuccefulBids(){
+    let bids:any
+    bids=[]
     //various constants and variables needed
     let url = 'https://pasd-webshop-api.onrender.com/api/order/';
     const config = {headers:{'x-api-key': '6FQeQLpd2LvnCRQpdxHf'}};
@@ -41,14 +49,13 @@ export class PackageService {
         body.order_id=order.id
         post_response =(await axios.post(url,body,config)).data
         if(post_response.status=='EXP'){
-          await this.startCreateProcess(order,post_response)
-          
+          bids.push(await this.startCreateProcess(order,post_response))
         }
       } catch (error) {
         console.log("Retailer did not accept this offer")
       }
     }  
-    return null
+    return bids
   }
 
   async create(createDeliveryDto: Create_DeliveryDto){
@@ -58,11 +65,11 @@ export class PackageService {
   }
 
    async startCreateProcess(order:Create_PackageDto,delivery:Create_DeliveryDto) {
-    console.log(delivery)
+    
     const response1=await this.delivery_model.create(delivery)
     const response=await this.package_model.create(order)
     //console.log(response1)
-    return null
+    return delivery
     
   }
 

@@ -7,15 +7,29 @@ import { PackageService } from './package.service';
 export class PackageController {
     constructor(private readonly PackageService: PackageService){}
     
-    @Get()
-    async findAll()
+    @Get('succesful-bids')
+    async getAllSuccefulBids()
     {
-        return this.PackageService.findAll();
+        return this.PackageService.getAllSuccefulBids();
     }
 
     @Post()
     async create(@Body() createDeliveryDto: Create_DeliveryDto) {
       return await this.PackageService.create(createDeliveryDto)
+    }
+
+    @Get('delivery/:id')
+    async getDelivery(
+     @Param('id')id,)
+    {
+      return await this.PackageService.getDelivery(id);
+    }
+
+    @Get('package/:id')
+    async getPackage(
+     @Param('id')id,)
+    {
+      return await this.PackageService.getPackage(id);
     }
 
 }
