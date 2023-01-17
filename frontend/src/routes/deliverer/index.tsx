@@ -1,1 +1,1 @@
-export * from './Deliverer';
+export * from './DelivererPage';

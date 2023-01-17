@@ -3,7 +3,7 @@ import {BackendContext} from "../../../BackendContext";
 import {getFormValues} from "../../../utils/form";
 import {DeliveryModel, UpdateResult} from "../../../models";
 import {DDApi} from "../../../api";
-import {DeliveryFormUpdateScheduler} from "../../components/DeliveryFormUpdateScheduler";
+import {DeliveryFormUpdateScheduler} from "../../components";
 
 function UpdateDeliveryForm() : JSX.Element {
     const backend = useContext(BackendContext);

@@ -19,6 +19,7 @@ function DeliveryArray({deliveries, loading}: DeliveryResultsProps) : JSX.Elemen
                     <ul>
                         {deliveries.map((delivery : DeliveryModel) => (
                             <li key={delivery.id}>
+                                <p>Id: {delivery.id}</p>
                                 <p>Cost (in cents): {delivery.cost_in_cents}</p>
                                 <p>Status: {delivery.status}</p>
                                 <p>Order id: {delivery.order_id}</p>

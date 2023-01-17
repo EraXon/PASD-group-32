@@ -1,24 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 import {BackendContext} from "../../../BackendContext";
-import {Packages} from "../../../models";
+import {Deliveries} from "../../../models";
 import {DDApi} from "../../../api";
-import {PackageArray} from "./PackageArray";
+import {DeliveryArray} from "./DeliveryArray";
 
 
 
-function FindPackageForm() : JSX.Element {
+function FindBids() : JSX.Element {
     const backend = useContext(BackendContext);
-    const [results, setResults] = useState([] as Packages);
+    const [results, setResults] = useState([] as Deliveries);
     const [loading, setLoading] = useState(false);
 
-    async function retrievePackages () : Promise<void> {
+    async function retrieveBids () : Promise<void> {
         setLoading(true);
         try {
-            let data = await DDApi.getPackages(backend);
+            let data = await DDApi.getBids(backend);
             setResults(data);
             setLoading(false);
         } catch (error : any) {
-            let errorMessage = `Error while fetching Packages!\n`;
+            let errorMessage = `Error while fetching the bids!\n`;
             let resMessage = error.data?.response['error-message'];
             if (resMessage) {
                 errorMessage += error.data.response['error-message'];
@@ -31,17 +31,18 @@ function FindPackageForm() : JSX.Element {
 
 
     useEffect(() => {
-        retrievePackages();
+        retrieveBids();
     }, [backend])
+
 
     return (
         <div>
-            <h3>Get Packages</h3>
-            <PackageArray packages={results} loading={loading} />
+            <h3>Get Bids</h3>
+            <DeliveryArray deliveries={results} loading={loading} />
         </div>
     );
 }
 
 export {
-    FindPackageForm
+    FindBids
 };

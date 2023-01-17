@@ -9,11 +9,10 @@ function HomePage() {
             </p>
             <Link to="/ddscheduler"> Scheduler </Link>
             <br />
-            <Link to="/dddscheduler"> Deliverer </Link>
+            <Link to="/dddeliverer"> Deliverer </Link>
             <br/>
             <Link to="/warehouse-worker"> Warehouse worker</Link>
             <br/>
-            <Link to="/orders"> Orders </Link>
         </div>
     );
 }

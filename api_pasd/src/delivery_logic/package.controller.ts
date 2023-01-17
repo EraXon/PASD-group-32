@@ -7,8 +7,8 @@ import { PackageService } from './package.service';
 export class PackageController {
     constructor(private readonly PackageService: PackageService){}
     
-    @Get('succesful-bids')
-    async getAllSuccefulBids()
+    @Get('successful-bids')
+    async getAllSuccessfulBids()
     {
         return this.PackageService.getAllSuccefulBids();
     }

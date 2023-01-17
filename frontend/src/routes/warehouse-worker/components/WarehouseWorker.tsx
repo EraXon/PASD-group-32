@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
-import {BackendContext} from "../../BackendContext";
-import {DeliveryModel} from "../../models";
-import {getFormValues} from "../../utils/form";
-import {DDApi} from "../../api";
-import {DeliveryFormUpdateWarehouseWorker} from "../components";
+import {BackendContext} from "../../../BackendContext";
+import {DeliveryModel} from "../../../models";
+import {getFormValues} from "../../../utils/form";
+import {DDApi} from "../../../api";
+import {DeliveryFormUpdateWarehouseWorker} from "../../components";
 
 
 function WarehouseWorker() : JSX.Element {
     const backend = useContext(BackendContext);
-    const [res, setRes] = useState({} as DeliveryModel);
+    const [res, setRes] = useState(0);
     const [loading, setLoading] = useState(false);
 
 
@@ -34,7 +34,7 @@ function WarehouseWorker() : JSX.Element {
 
     return (
         <div>
-            <h3>Update Delivery - For Deliverer</h3>
+            <h3>Update Delivery - For Warehouse Worker</h3>
             <DeliveryFormUpdateWarehouseWorker onSubmit={handleSubmit} />
             {loading && <p>Loading...</p> }
         </div>
